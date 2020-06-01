@@ -11,3 +11,19 @@
 - скрещивание с выведением нового поколения и мутациями
 - проверка на подходящие решения
 - отбор наилучших вариантов для следующего скрещивания
+
+## Запуск
+
+```bash
+# go run main.go
+> 1×x + 2×y + 3×z + 4×w = 30
+> Solve 1: [3 0 1 6]
+> Generations:  3
+```
+
+## Тесты
+
+```bash
+# go test ./domain -cover   
+> ok      github.com/njspok/simple-genetic-algorithm/domain       0.010s  coverage: 97.2% of statements
+```
