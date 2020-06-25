@@ -12,6 +12,11 @@ type Population struct {
 	bodies []Body
 }
 
+// Bodies возвращаем особей популяции
+func (p Population) Bodies() []Body {
+	return p.bodies
+}
+
 // Reproduction создаем новую популяцию, на основе
 // старой, путем скрещивания каждого с каждым.
 func (p Population) Reproduction() Population {

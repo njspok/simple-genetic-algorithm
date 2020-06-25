@@ -16,18 +16,22 @@ func (b Body) Genes() [4]int {
 	return b.genes
 }
 
+// IsAdapted особь адаптировалась к условиям
 func (b Body) IsAdapted() bool {
 	return b.Prox() == 0
 }
 
+// Prox насколько хорошо особь адаптировалась
+// к условиям среды, 0 значит идеально.
 func (b Body) Prox() int {
 	res := 0
 	for i, v := range b.genes {
 		res += v * b.c[i]
 	}
-	return res - b.c.E()
+	return abs(res - b.c.E())
 }
 
+// Cross скрещивание с мутациями
 func (b Body) Cross(b2 Body) Body {
 	n := rand.Intn(len(b.genes)) + 1
 	child := b.cross(n, b2)
@@ -35,12 +39,15 @@ func (b Body) Cross(b2 Body) Body {
 	return child
 }
 
+// mutate мутируем гены особи.
 func (b *Body) mutate() {
 	i := rand.Intn(len(b.genes))
 	v := rand.Intn(b.c.E()) + 1
 	b.genes[i] = v
 }
 
+// cross скрещивание без мутаций.
+// n указывает место разрыва гена.
 func (b Body) cross(n int, b2 Body) Body {
 	child := Body{c: b.c}
 	g1 := b.genes[0:n]
@@ -48,4 +55,12 @@ func (b Body) cross(n int, b2 Body) Body {
 	newGenes := append(g1, g2...)
 	copy(child.genes[:], newGenes)
 	return child
+}
+
+// абсолютное значение для int
+func abs(v int) int {
+	if v < 0 {
+		return -v
+	}
+	return v
 }
